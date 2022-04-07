@@ -1,3 +1,27 @@
+<?php
+session_start();
+include ('includes/dbconn.php');
+if(isset($_POST['signin'])) {
+
+
+    $email = $_POST['email'];
+    $password = ($_POST['password']);
+    $sql = "SELECT * FROM employees WHERE email='$email' and password LIKE '$password'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows == 1) {
+        while($row = $result->fetch_assoc()) {
+            $_SESSION["empid"]=$row["id"];
+            $_SESSION["empname"]=$row["firstname"];
+            header('Location: employees/dashboard.php');
+        }
+    } else {
+        $php_errormsg="wrong email or password";
+    }
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +39,22 @@
 
 <div class="container col-lg-6">
     <h2>Login form</h2>
-    <form action="/action_page.php" method="post">
+    <form method="post" name="signin">
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <?php
+        if(isset($php_errormsg)){
+            echo $php_errormsg;
+            echo "<br>";
+        }
+        ?>
+        <button type="submit" name="signin" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
