@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 07 Απρ 2022 στις 15:48:41
+-- Χρόνος δημιουργίας: 07 Απρ 2022 στις 17:55:38
 -- Έκδοση διακομιστή: 10.4.24-MariaDB
 -- Έκδοση PHP: 7.4.28
 
@@ -40,7 +40,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
-(1, 'georgios', 'garoufalis', 'geogar@gmail.com', 'test');
+(1, 'Georgios', 'Garoufalis', 'geogar@gmail.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -58,25 +58,32 @@ CREATE TABLE `stsubmission` (
 --
 
 INSERT INTO `stsubmission` (`id`, `status`) VALUES
-(1, 'pending'),
-(2, 'approved'),
-(3, 'rejected');
+(1, 'Pending'),
+(2, 'Approved'),
+(3, 'Rejected');
 
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `submission`
+-- Δομή πίνακα για τον πίνακα `submissions`
 --
 
-CREATE TABLE `submission` (
+CREATE TABLE `submissions` (
   `id` int(11) NOT NULL,
-  `date_submitted` date NOT NULL,
+  `date_submitted` date NOT NULL DEFAULT current_timestamp(),
   `vacstart` date NOT NULL,
   `vacend` date NOT NULL,
   `totaldays` int(11) NOT NULL,
   `statusid` int(11) NOT NULL,
   `employeeid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `submissions`
+--
+
+INSERT INTO `submissions` (`id`, `date_submitted`, `vacstart`, `vacend`, `totaldays`, `statusid`, `employeeid`) VALUES
+(1, '2022-04-07', '2022-04-22', '2022-04-25', 3, 1, 1);
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -95,10 +102,12 @@ ALTER TABLE `stsubmission`
   ADD PRIMARY KEY (`id`);
 
 --
--- Ευρετήρια για πίνακα `submission`
+-- Ευρετήρια για πίνακα `submissions`
 --
-ALTER TABLE `submission`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employeeid` (`employeeid`),
+  ADD KEY `statusid` (`statusid`);
 
 --
 -- AUTO_INCREMENT για άχρηστους πίνακες
@@ -111,10 +120,21 @@ ALTER TABLE `employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT για πίνακα `submission`
+-- AUTO_INCREMENT για πίνακα `submissions`
 --
-ALTER TABLE `submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Περιορισμοί για άχρηστους πίνακες
+--
+
+--
+-- Περιορισμοί για πίνακα `submissions`
+--
+ALTER TABLE `submissions`
+  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`employeeid`) REFERENCES `employees` (`id`),
+  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`statusid`) REFERENCES `stsubmission` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
