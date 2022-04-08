@@ -24,8 +24,9 @@ if(isset($_SESSION["empname"])) {
     $sql = "SELECT submissions.*,stsubmission.status FROM employees, submissions, stsubmission WHERE stsubmission.id=submissions.statusid and employees.id = submissions.employeeid and employeeid = '" . $_SESSION['empid'] . "' ORDER BY submissions.date_submitted DESC";
     $result = $conn->query($sql);
 
+    echo "<p class='tabletitle'>Past submissions<br><button id='newsubmit' type='button' class='btn btn-primary'><a style='text-decoration: none;color: white;' href='submit.php' tite='Submit request'>Submit request</a></button></p>";
     if ($result->num_rows > 0) {
-        echo "<p class='tabletitle'>Past submissions</p>";
+
 //        echo "<div class='col-md-2'></div>";
         echo "<div class='container col-md-8'><table class='table table-striped table-hover'><tr><th>Date submitted</th><th>Vacation Start</th><th>Vacation End</th><th>Days requested</th><th>Status</th></tr>";
         while($row = $result->fetch_assoc()) {
@@ -36,6 +37,7 @@ if(isset($_SESSION["empname"])) {
 
         }
      else {
+         echo "no past submissions found";
     }
 
     $conn->close();
