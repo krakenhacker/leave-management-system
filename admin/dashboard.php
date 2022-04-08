@@ -18,13 +18,13 @@ session_start();
 if(isset($_SESSION["adname"])) {
     ?>
     <p class="userinfo"> Welcome <?php echo $_SESSION["adname"]; ?>.<br>
-        <button id="logout" type="button" class="btn btn-secondary"><a href="../employees/logout.php" tite="Logout">Logout </a></button></p><br>
+        <a class="btn btn-secondary" href="../employees/logout.php" tite="Logout">Logout </a></p><br>
 
     <?php
     $sql = "SELECT employees.*, emp_role.role FROM employees, emp_role WHERE employees.id=emp_role.employeeid";
     $result = $conn->query($sql);
 
-    echo "<p class='tabletitle'>List of existing users<br><button id='newuser' type='button' class='btn btn-primary'><a style='text-decoration: none;color: white;' href='createuser.php' tite='Create User'>Create User</a></button></p>";
+    echo "<p class='tabletitle'>List of existing users<br><a class='btn btn-primary' style='text-decoration: none;color: white;' href='createuser.php' tite='Create User'>Create User</a></p>";
     if ($result->num_rows > 0) {
 
 //        echo "<div class='col-md-2'></div>";
@@ -46,7 +46,7 @@ if(isset($_SESSION["adname"])) {
 
 
     <?php
-}else echo "<h1 style='text-align: center'>Please login first</h1><br><p id='loginpage'><button type='button' class='btn btn-primary'><a href='../index.php' style='text-decoration: none;color: white;'>Login Page </a></button></p>";
+}else echo "<h1 style='text-align: center'>Please login first</h1><br><p id='loginpage'><a class='btn btn-primary' href='../index.php' style='text-decoration: none;color: white;'>Login Page </a></p>";
 ?>
 </body>
 </html>

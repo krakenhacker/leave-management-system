@@ -18,13 +18,13 @@ session_start();
 if(isset($_SESSION["empname"])) {
 ?>
     <p class="userinfo"> Welcome <?php echo $_SESSION["empname"]; ?>.<br>
-        <button id="logout" type="button" class="btn btn-secondary"><a href="logout.php" tite="Logout">Logout </a></button></p><br>
+        <a class="btn btn-secondary" href="logout.php" tite="Logout">Logout </a></p><br>
 
     <?php
     $sql = "SELECT submissions.*,stsubmission.status FROM employees, submissions, stsubmission WHERE stsubmission.id=submissions.statusid and employees.id = submissions.employeeid and employeeid = '" . $_SESSION['empid'] . "' ORDER BY submissions.date_submitted DESC";
     $result = $conn->query($sql);
 
-    echo "<p class='tabletitle'>Past submissions<br><button id='newsubmit' type='button' class='btn btn-primary'><a style='text-decoration: none;color: white;' href='submit.php' tite='Submit request'>Submit request</a></button></p>";
+    echo "<p class='tabletitle'>Past submissions<br><a class='btn btn-primary' style='text-decoration: none;color: white;' href='submit.php' tite='Submit request'>Submit request</a></p>";
     if ($result->num_rows > 0) {
 
 //        echo "<div class='col-md-2'></div>";

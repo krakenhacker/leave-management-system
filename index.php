@@ -55,7 +55,7 @@ if(isset($_POST['signin'])) {
         }
         ?>
         <button type="submit" name="signin" class="btn btn-primary">Sign in</button>
-        <button id='adminlogin' type='button' class='btn btn-secondary'><a style='text-decoration: none;color: white;' href='/admin/login.php' tite='adminlogin'>Login as admin</a></button>
+        <a class='btn btn-secondary' style='text-decoration: none;color: white;' href='/admin/login.php' tite='adminlogin'>Login as admin</a>
     </form>
 </div>
 

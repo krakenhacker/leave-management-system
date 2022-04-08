@@ -52,7 +52,7 @@ if(isset($_POST['submit'])) {
 <?php
 if(isset($_SESSION["empname"])) {
     ?>
-    <button type='button' class='btn btn-secondary' style="margin: 1rem;"><a href='dashboard.php' style='text-decoration: none;color: white;'><- Back to dashboard </a></button>
+    <a class='btn btn-secondary' href='dashboard.php' style='text-decoration: none;color: white;margin: 1rem;'><- Back to dashboard </a>
 
     <div class="container col-lg-4">
         <h2>Sumbission request form</h2><br>

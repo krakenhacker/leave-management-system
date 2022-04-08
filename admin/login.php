@@ -38,7 +38,7 @@ if(isset($_POST['signin'])) {
 <body>
 
 <div class="container col-lg-6">
-    <button type='button' class='btn btn-secondary' style="margin: 1rem;"><a href='../index.php' style='text-decoration: none;color: white;'><- Employee login form </a></button>
+    <a class='btn btn-secondary' href='../index.php' style='text-decoration: none;color: white;'><- Employee login form </a>
     <h2>Administrator Login form</h2>
     <form method="post" name="signin">
         <div class="form-group">
