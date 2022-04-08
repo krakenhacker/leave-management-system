@@ -8,16 +8,28 @@ if(isset($_POST['submit'])) {
     $datestartd = new DateTime($datestart);
     $dateend = $_POST['dateend'];
     $dateendd = new DateTime($dateend);
+
     $datestart = date_format($datestartd,"Y-m-d");
     $dateend = date_format($dateendd,"Y-m-d");
+
     $reason = $_POST['reason'];
+
+    $currentdate = date("Y-m-d");
+    $currentdated = new DateTime($currentdate);
+    $currentdate = date_format($currentdated,"Y-m-d");
+    $currentdatediff = date_diff($currentdated,$datestartd);
+    $checkstartdate = $currentdatediff->format("%R");
+
+
     $datediff = date_diff($datestartd,$dateendd);
     $totaldays = $datediff->format("%a");
+    $totaldayscheck = $datediff->format("%R");
+
     $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason')";
 
-    if ($totaldays < 0) {
+    if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0) {
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+//            echo "New record created successfully";
         } else {
             $php_errormsg = "wrong email or password";
         }
@@ -48,11 +60,11 @@ if(isset($_SESSION["empname"])) {
         <form method="post" name="submit">
             <div class="form-group">
                 <label for="datestart"> Date From: </label>
-                <input type="date" class="form-control" id="datestart" name="datestart" required>
+                <input type="date" class="form-control" id="datestart" name="datestart" min="<?php echo date("Y-m-d"); ?>" required>
             </div>
             <div class="form-group">
                 <label for="dateend"> Date To: </label>
-                <input type="date" class="form-control" id="dateend" name="dateend" required>
+                <input type="date" class="form-control" id="dateend" name="dateend" min="<?php echo date("Y-m-d"); ?>" required>
             </div>
             <div class="form-group">
                 <label for="reason">Reason:</label>
