@@ -30,8 +30,7 @@ if(isset($_POST['submit'])) {
     if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0) {
         if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
-        } else {
-            $php_errormsg = "wrong email or password";
+            header("Location:dashboard.php");
         }
         $conn->close();
     }else{
