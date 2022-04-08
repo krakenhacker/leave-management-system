@@ -1,20 +1,20 @@
 <?php
 session_start();
-include ('includes/dbconn.php');
+include ('../includes/dbconn.php');
 if(isset($_POST['signin'])) {
 
 
     $email = $_POST['email'];
     $password = ($_POST['password']);
     $password = md5($password);
-    $sql = "SELECT * FROM employees WHERE email='$email' and password LIKE '$password'";
+    $sql = "SELECT employees.* FROM employees, emp_role WHERE employees.id=emp_role.employeeid and employees.email='$email' and employees.password LIKE '$password' and employees.roleid='2'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
         while($row = $result->fetch_assoc()) {
-            $_SESSION["empid"]=$row["id"];
-            $_SESSION["empname"]=$row["firstname"];
-            header('Location: employees/dashboard.php');
+            $_SESSION["adid"]=$row["id"];
+            $_SESSION["adname"]=$row["firstname"];
+            header('Location: dashboard.php');
         }
     } else {
         $php_errormsg="wrong email or password ";
@@ -38,7 +38,8 @@ if(isset($_POST['signin'])) {
 <body>
 
 <div class="container col-lg-6">
-    <h2>Login form</h2>
+    <button type='button' class='btn btn-secondary' style="margin: 1rem;"><a href='../index.php' style='text-decoration: none;color: white;'><- Employee login form </a></button>
+    <h2>Administrator Login form</h2>
     <form method="post" name="signin">
         <div class="form-group">
             <label for="email">Email:</label>
@@ -55,7 +56,6 @@ if(isset($_POST['signin'])) {
         }
         ?>
         <button type="submit" name="signin" class="btn btn-primary">Sign in</button>
-        <button id='adminlogin' type='button' class='btn btn-secondary'><a style='text-decoration: none;color: white;' href='/admin/login.php' tite='adminlogin'>Login as admin</a></button>
     </form>
 </div>
 
