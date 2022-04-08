@@ -37,7 +37,7 @@ if(isset($_SESSION["empname"])) {
 
         }
      else {
-         echo "no past submissions found";
+         echo "<p style='text-align: center'>no past submissions found</p>";
     }
 
     $conn->close();
