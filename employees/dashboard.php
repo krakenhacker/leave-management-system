@@ -17,7 +17,7 @@ session_start();
 <?php
 if(isset($_SESSION["empname"])) {
 ?>
-    <p class="userinfo"> Welcome <?php echo $_SESSION["empname"]; ?>.
+    <p class="userinfo"> Welcome <?php echo $_SESSION["empname"]; ?>.<br>
         <button id="logout" type="button" class="btn btn-secondary"><a href="logout.php" tite="Logout">Logout </a></button></p><br>
 
     <?php

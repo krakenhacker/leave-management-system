@@ -6,6 +6,7 @@ if(isset($_POST['signin'])) {
 
     $email = $_POST['email'];
     $password = ($_POST['password']);
+    $password = md5($password);
     $sql = "SELECT * FROM employees WHERE email='$email' and password LIKE '$password'";
     $result = $conn->query($sql);
 
@@ -16,7 +17,7 @@ if(isset($_POST['signin'])) {
             header('Location: employees/dashboard.php');
         }
     } else {
-        $php_errormsg="wrong email or password";
+        $php_errormsg="wrong email or password ".$password."";
     }
     $conn->close();
 }

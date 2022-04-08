@@ -16,5 +16,8 @@
 }
 .tabletitle{
     text-align: center;
-    font-size: x-large;
+    font-size: xx-large;
+}
+p button{
+    margin: 0.5rem;
 }
