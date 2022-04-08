@@ -7,7 +7,7 @@ if(isset($_POST['signin'])) {
     $email = $_POST['email'];
     $password = ($_POST['password']);
     $password = md5($password);
-    $sql = "SELECT employees.* FROM employees, emp_role WHERE employees.id=emp_role.employeeid and employees.email='$email' and employees.password LIKE '$password' and employees.roleid='2'";
+    $sql = "SELECT employees.* FROM employees WHERE employees.email='$email' and employees.password LIKE '$password' and employees.roleid='2'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
