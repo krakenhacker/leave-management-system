@@ -17,9 +17,11 @@ if(isset($_POST['create'])) {
 
 
     if ($password == $confirmpassowrd) {
-        if ($conn->query($sql) === TRUE && !isset($re)) {
+        if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
             header("Location:dashboard.php");
+        }else{
+            $php_errormsg = "email already exist";
         }
         $conn->close();
     }else {
