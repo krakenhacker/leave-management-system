@@ -28,9 +28,9 @@ if(isset($_SESSION["adname"])) {
     if ($result->num_rows > 0) {
 
 //        echo "<div class='col-md-2'></div>";
-        echo "<div class='container col-md-8'><table class='table table-striped table-hover'><tr><th>First name</th><th>Last name</th><th>Email</th><th>User type</th></tr>";
+        echo "<div class='container col-md-8'><table class='table table-striped table-hover'><tr><th>First name</th><th>Last name</th><th>Email</th><th>User type</th><th>Actions</th></tr>";
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["email"]."</td><td>".$row["role"]."</td></tr>";
+            echo "<tr><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["email"]."</td><td>".$row["role"]."</td><td><a class='btn btn-secondary' href='userdetails?id=".$row["id"].".php'>Details >></a></td></tr>";
         }
         echo "</table></div></div>";
 //        echo "<div class='col-md-2'></div>";
