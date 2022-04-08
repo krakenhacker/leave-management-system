@@ -21,7 +21,7 @@ if(isset($_SESSION["adname"])) {
         <a class="btn btn-secondary" href="../employees/logout.php" tite="Logout">Logout </a></p><br>
 
     <?php
-    $sql = "SELECT employees.*, emp_role.role FROM employees, emp_role WHERE employees.id=emp_role.employeeid";
+    $sql = "SELECT employees.*, emp_role.role FROM employees, emp_role WHERE employees.roleid=emp_role.id";
     $result = $conn->query($sql);
 
     echo "<p class='tabletitle'>List of existing users<br><a class='btn btn-primary' style='text-decoration: none;color: white;' href='createuser.php' tite='Create User'>Create User</a></p>";
