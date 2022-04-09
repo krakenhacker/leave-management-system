@@ -31,7 +31,7 @@ if(isset($_POST['create'])) {
 ?>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Create User</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

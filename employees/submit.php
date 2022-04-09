@@ -40,7 +40,7 @@ if(isset($_POST['submit'])) {
 ?>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Submit leaving</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
