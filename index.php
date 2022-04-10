@@ -14,6 +14,7 @@ if(isset($_POST['signin'])) {
         while($row = $result->fetch_assoc()) {
             $_SESSION["empid"]=$row["id"];
             $_SESSION["empname"]=$row["firstname"];
+            $_SESSION["empemail"]=$row["email"];
             header('Location: employees/dashboard.php');
         }
     } else {

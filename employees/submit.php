@@ -25,11 +25,31 @@ if(isset($_POST['submit'])) {
     $totaldays = $datediff->format("%a");
     $totaldayscheck = $datediff->format("%R");
 
-    $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason')";
+    $sqlcheck = "SELECT * FROM employees WHERE roleid=2";
+    $result = $conn2->query($sqlcheck);
+    $conn2->close();
+    $subject = "Leave request";
+    $headers .= "From:". $_SESSION["empemail"] . "\r\n" . $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $body = "<html><head><title>Leave request email</title></head><body>
+        <p>Dear supervisor,<br> employee ".$_SESSION['empname']." with id ".$_SESSION['empid']." requested for some time off, starting on
+        ".$datestart." and ending on ".$dateend.", stating the reason:
+        ".$reason." <br> <br>
+        Click on one of the below links to approve or reject the application:<br>
+        <a href='http://localhost/admin/updatesubmission.php'>Approve</a> or <a href='http://localhost/admin/updatesubmission.php'>Reject</a>
+        </p>
+        </body></html>
+        ";
+
+    $submitkey = random_strings(20);
+    $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason, submitkey)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason', '$submitkey')";
 
     if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0) {
         if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
+            while($row = $result->fetch_assoc()) {
+                mail($row['email'],$subject,$body,$headers);
+            }
             header("Location:dashboard.php");
         }
         $conn->close();
@@ -88,3 +108,12 @@ if(isset($_SESSION["empname"])) {
 ?>
 </body>
 </html>
+
+<?php
+function random_strings($length_of_string)
+{
+    $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    return substr(str_shuffle($str_result),
+        0, $length_of_string);
+}
+?>
