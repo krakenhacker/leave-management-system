@@ -31,15 +31,6 @@ if(isset($_POST['submit'])) {
     $subject = "Leave request";
     $headers .= "From:". $_SESSION["empemail"] . "\r\n" . $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $body = "<html><head><title>Leave request email</title></head><body>
-        <p>Dear supervisor,<br> employee ".$_SESSION['empname']." with id ".$_SESSION['empid']." requested for some time off, starting on
-        ".$datestart." and ending on ".$dateend.", stating the reason:
-        ".$reason." <br> <br>
-        Click on one of the below links to approve or reject the application:<br>
-        <a href='http://localhost/admin/updatesubmission.php'>Approve</a> or <a href='http://localhost/admin/updatesubmission.php'>Reject</a>
-        </p>
-        </body></html>
-        ";
 
     $submitkey = random_strings(20);
     $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason, submitkey)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason', '$submitkey')";
@@ -48,6 +39,15 @@ if(isset($_POST['submit'])) {
         if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
             while($row = $result->fetch_assoc()) {
+                $body = "<html><head><title>Leave request email</title></head><body>
+                    <p>Dear supervisor,<br> employee ".$_SESSION['empname']." with id ".$_SESSION['empid']." requested for some time off, starting on
+                    ".$datestart." and ending on ".$dateend.", stating the reason:
+                    ".$reason." <br> <br>
+                    Click on one of the below links to approve or reject the application:<br>
+                    <a href='http://localhost/admin/updatesubmission.php?id=".$_SESSION['empid']."&submitkey=".$submitkey."&status=approved'>Approve</a> or <a href='http://localhost/admin/updatesubmission.php?id=".$_SESSION['empid']."&submitkey=".$submitkey."&status=rejected'>Reject</a>
+                    </p>
+                    </body></html>
+        ";
                 mail($row['email'],$subject,$body,$headers);
             }
             header("Location:dashboard.php");

@@ -7,6 +7,7 @@ $dbname = "leaveportaldb";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 $conn2 = new mysqli($servername, $username, $password, $dbname);
+$conn3 = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
