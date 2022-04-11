@@ -9,6 +9,8 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/3cbcc35af1.js" crossorigin="anonymous"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -30,7 +32,7 @@ if(isset($_SESSION["adname"])) {
 //        echo "<div class='col-md-2'></div>";
         echo "<div class='container col-md-8'><table class='table table-striped table-hover'><tr><th>First name</th><th>Last name</th><th>Email</th><th>User type</th><th>Actions</th></tr>";
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["email"]."</td><td>".$row["role"]."</td><td><a class='btn btn-secondary' href='userdetails.php?id=".$row["id"].".php'>Details >></a></td></tr>";
+            echo "<tr><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["email"]."</td><td>".$row["role"]."</td><td><a class='btn btn-secondary' href='userdetails.php?id=".$row["id"].".php'>Details <i class='fa fa-gear'></i></a></td></tr>";
         }
         echo "</table></div></div>";
 //        echo "<div class='col-md-2'></div>";
