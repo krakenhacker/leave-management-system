@@ -1,9 +1,21 @@
 <?php
 include ('../includes/dbconn.php');
+
+$flag=TRUE;
+$sqlquerycheck = array("SELECT","UPDATE","DELETE");
+
 $employeeid = $_GET['id'];
 $submitkey = $_GET['submitkey'];
+foreach ($sqlquerycheck as $value) {
+    $upper_submitkey = strtoupper($submitkey);
+    if (strpos($upper_submitkey, $value) !== FALSE) {
+        $flag = FALSE;
+        $php_errormsg = "sql key words found";
+        break;
+    }
+}
 $status = $_GET['status'];
-if(isset($_GET['id']) && isset($_GET['submitkey']) && isset($_GET['status'])) {
+if(isset($_GET['id']) && isset($_GET['submitkey']) && isset($_GET['status']) and $flag==TRUE) {
 
     if ($status == "approved") {
         $sqlupdate = "UPDATE submissions SET statusid = 2 WHERE submissions.employeeid = $employeeid and submitkey = '$submitkey'";

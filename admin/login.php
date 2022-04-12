@@ -2,24 +2,33 @@
 session_start();
 include ('../includes/dbconn.php');
 if(isset($_POST['signin'])) {
-
+    $flag = TRUE;
 
     $email = $_POST['email'];
+    $email = $_POST['email'];
+    if (!mb_eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
+        // Return Error - Invalid Email
+        $php_errormsg = "The email you have entered is invalid, please try again.";
+        $flag = FALSE;
+    }
     $password = ($_POST['password']);
     $password = md5($password);
-    $sql = "SELECT employees.* FROM employees WHERE employees.email='$email' and employees.password LIKE '$password' and employees.roleid='2'";
-    $result = $conn->query($sql);
 
-    if ($result->num_rows == 1) {
-        while($row = $result->fetch_assoc()) {
-            $_SESSION["adid"]=$row["id"];
-            $_SESSION["adname"]=$row["firstname"];
-            header('Location: dashboard.php');
+    if ($flag == TRUE) {
+        $sql = "SELECT employees.* FROM employees WHERE employees.email='$email' and employees.password LIKE '$password' and employees.roleid='2'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            while ($row = $result->fetch_assoc()) {
+                $_SESSION["adid"] = $row["id"];
+                $_SESSION["adname"] = $row["firstname"];
+                header('Location: dashboard.php');
+            }
+        } else {
+            $php_errormsg = "wrong email or password ";
         }
-    } else {
-        $php_errormsg="wrong email or password ";
+        $conn->close();
     }
-    $conn->close();
 }
 ?>
 

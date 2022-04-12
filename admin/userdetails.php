@@ -2,20 +2,27 @@
 include ('../includes/dbconn.php');
 session_start();
 if(isset($_POST['update'])) {
+    $flag = TRUE;
     $employeeid = $_POST['id'];
     $password = ($_POST['password']);
+    if (!mb_eregi("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", $password)) {
+        $php_errormsg = "The password you have entered is invalid, please try again.(at least one upper letter,one number, lengh:8-40)";
+        $flag = FALSE;
+    }
     $confirmpassowrd = ($_POST['confirmpassword']);
     $password = md5($password);
     $confirmpassowrd = md5($confirmpassowrd);
 
-    if ($password == $confirmpassowrd) {
+    if ($password == $confirmpassowrd and $flag==TRUE) {
         $sqlupdate = "UPDATE employees SET password = '$password' WHERE employees.id=$employeeid;";
         if ($conn->query($sqlupdate) === TRUE) {
             header("Location:dashboard.php");
         }
         $conn->close();
     }else {
-        $php_errormsg = "password doesn't match";
+        if($flag == TRUE) {
+            $php_errormsg = "password doesn't match";
+        }
     }
 }
 ?>
