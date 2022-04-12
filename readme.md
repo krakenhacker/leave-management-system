@@ -25,9 +25,9 @@ password: admin
 
        >smtp_port=587
 
-       >sendmail_from = milopleInc@gmail.com  /*Your gmail id*/
+       >uncommenct -> sendmail_from = example@gmail.com  /*Your gmail id*/
 
-       >sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
+       >uncommenct -> sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
 
     5. Open sendmail.ini file from C:\xampp\sendmail.
     6. Press ctrl + f & find sendmail.
