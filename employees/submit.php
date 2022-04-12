@@ -2,7 +2,8 @@
 include ('../includes/dbconn.php');
 session_start();
 if(isset($_POST['submit'])) {
-
+$flag=TRUE;
+$sqlquerycheck = array("SELECT","UPDATE","DELETE");
 
     $datestart = $_POST['datestart'];
     $datestartd = new DateTime($datestart);
@@ -13,6 +14,14 @@ if(isset($_POST['submit'])) {
     $dateend = date_format($dateendd,"Y-m-d");
 
     $reason = $_POST['reason'];
+    foreach ($sqlquerycheck as $value) {
+        $upper_reason = strtoupper($reason);
+        if (strpos($upper_reason, $value) !== FALSE) {
+            $flag = FALSE;
+            $php_errormsg = "sql key words found";
+            break;
+        }
+    }
 
     $currentdate = date("Y-m-d");
     $currentdated = new DateTime($currentdate);
@@ -33,9 +42,17 @@ if(isset($_POST['submit'])) {
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
     $submitkey = random_strings(20);
+    foreach ($sqlquerycheck as $value) {
+        $upper_submitkey = strtoupper($submitkey);
+        if (strpos($upper_submitkey, $value) !== FALSE) {
+            $flag = FALSE;
+            $php_errormsg = "sql key words found";
+            break;
+        }
+    }
     $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason, submitkey)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason', '$submitkey')";
 
-    if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0) {
+    if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0 and $flag==TRUE) {
         if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
             while($row = $result->fetch_assoc()) {
@@ -54,7 +71,9 @@ if(isset($_POST['submit'])) {
         }
         $conn->close();
     }else{
-        $php_errormsgdate = "your dates are incompatible";
+        if($flag == TRUE) {
+            $php_errormsgdate = "your dates are incompatible";
+        }
     }
 }
 ?>
@@ -93,6 +112,10 @@ if(isset($_SESSION["empname"])) {
             <?php
             if(isset($php_errormsgdate)){
                 echo $php_errormsgdate;
+                echo "<br><br>";
+            }
+            if(isset($php_errormsg)){
+                echo $php_errormsg;
                 echo "<br><br>";
             }
             ?>

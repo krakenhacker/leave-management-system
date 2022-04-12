@@ -8,7 +8,7 @@
 
 email: george.sot@windowslive.com
 
-password: admin
+password: Admin123
 
 # Getting Started
 

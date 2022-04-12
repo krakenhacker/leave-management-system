@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 12 Απρ 2022 στις 08:43:43
--- Έκδοση διακομιστή: 10.4.24-MariaDB
--- Έκδοση PHP: 7.4.28
+-- Χρόνος δημιουργίας: 12 Απρ 2022 στις 12:56:40
+-- Έκδοση διακομιστή: 10.4.22-MariaDB
+-- Έκδοση PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,8 +41,9 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `firstname`, `lastname`, `email`, `password`, `roleid`) VALUES
-(19, 'GEORGIOS', 'GAROUFALIS', 'george.sot@windowslive.com', '21232f297a57a5a743894a0e4a801fc3', 2),
-(20, 'aikaterini', 'talla', 'katerinatalla28@gmail.com', '38d53ba47a82941ccbb1df543665507a', 1);
+(19, 'GEORGIOS', 'GAROUFALIS', 'george.sot@windowslive.com', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 2),
+(20, 'aikaterini', 'talla', 'katerinatalla28@gmail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 1),
+(21, 'Ioannis', 'Bouzikas', 'bouzikas@gmail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 1);
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,9 @@ INSERT INTO `submissions` (`id`, `date_submitted`, `vacstart`, `vacend`, `totald
 (40, '2022-04-11', '2022-04-15', '2022-04-18', 3, 2, 20, 'Vacation', 'icPmEUAtD9byMTsXHR75'),
 (41, '2022-04-11', '2022-06-16', '2022-06-17', 1, 3, 20, 'i have my birthay on 16 of June', 'zpo2XDRthKBbW7vsTVF4'),
 (42, '2022-04-11', '2022-04-30', '2022-05-02', 2, 2, 19, 'Vacation', 'bQ7U68aPhMouc3NTFWn0'),
-(43, '2022-04-11', '2023-01-12', '2023-01-20', 8, 3, 19, 'vacation', 'MFUqLcZRkwWjsYIT6nN0');
+(43, '2022-04-11', '2023-01-12', '2023-01-20', 8, 3, 19, 'vacation', 'MFUqLcZRkwWjsYIT6nN0'),
+(48, '2022-04-12', '2022-04-20', '2022-04-22', 2, 2, 21, 'vacation', '3IisL0m2V4Mta7dolOQ6'),
+(57, '2022-04-12', '2022-04-14', '2022-04-17', 3, 2, 20, 'Vacation', 'GN1Rd9Sx86pJf0Oh3kVo');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -151,13 +154,13 @@ ALTER TABLE `submissions`
 -- AUTO_INCREMENT για πίνακα `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT για πίνακα `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Περιορισμοί για άχρηστους πίνακες

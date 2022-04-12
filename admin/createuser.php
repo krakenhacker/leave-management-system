@@ -2,21 +2,43 @@
 include ('../includes/dbconn.php');
 session_start();
 if(isset($_POST['create'])) {
-
+    $flag=TRUE;
+    $sqlquerycheck = array("SELECT","UPDATE","DELETE");
 
     $firstname = $_POST['firstname'];
+    if(empty($firstname)){
+        $flag=FALSE;
+        $php_errormsg = "firstname is empty";
+    }
     $lastname = $_POST['lastname'];
+    if(empty($lastname)){
+        $flag=FALSE;
+        $php_errormsg = "lastname is empty";
+    }
     $email = $_POST['email'];
+    if (!mb_eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
+        // Return Error - Invalid Email
+        $php_errormsg = "The email you have entered is invalid, please try again.";
+        $flag = FALSE;
+    }
     $password = ($_POST['password']);
+    if (!mb_eregi("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", $password)) {
+        $php_errormsg = "The password you have entered is invalid, please try again.(at least one upper letter,one number, lengh:8-40)";
+        $flag = FALSE;
+    }
     $confirmpassowrd = ($_POST['confirmpassword']);
     $password = md5($password);
     $confirmpassowrd = md5($confirmpassowrd);
     $usertype = $_POST['usertype'];
+    if(empty($usertype)){
+        $flag=FALSE;
+        $php_errormsg = "usertype is empty";
+    }
 
     $sql = "INSERT INTO employees (firstname, lastname, email, password, roleid)VALUES ('$firstname', '$lastname', '$email', '$password', $usertype)";
 
 
-    if ($password == $confirmpassowrd) {
+    if ($password == $confirmpassowrd and $flag == TRUE) {
         if ($conn->query($sql) === TRUE) {
 //            echo "New record created successfully";
             header("Location:dashboard.php");
@@ -25,7 +47,9 @@ if(isset($_POST['create'])) {
         }
         $conn->close();
     }else {
+        if($flag == TRUE) {
             $php_errormsg = "password doesn't match";
+        }
     }
 }
 ?>
