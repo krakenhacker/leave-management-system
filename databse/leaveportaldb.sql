@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 11 Απρ 2022 στις 01:16:40
+-- Χρόνος δημιουργίας: 12 Απρ 2022 στις 08:43:43
 -- Έκδοση διακομιστή: 10.4.24-MariaDB
 -- Έκδοση PHP: 7.4.28
 
@@ -42,7 +42,7 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `firstname`, `lastname`, `email`, `password`, `roleid`) VALUES
 (19, 'GEORGIOS', 'GAROUFALIS', 'george.sot@windowslive.com', '21232f297a57a5a743894a0e4a801fc3', 2),
-(20, 'aikaterini', 'talla', 'katerinatalla28@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 1);
+(20, 'aikaterini', 'talla', 'katerinatalla28@gmail.com', '38d53ba47a82941ccbb1df543665507a', 1);
 
 -- --------------------------------------------------------
 
@@ -106,19 +106,10 @@ CREATE TABLE `submissions` (
 --
 
 INSERT INTO `submissions` (`id`, `date_submitted`, `vacstart`, `vacend`, `totaldays`, `statusid`, `employeeid`, `reason`, `submitkey`) VALUES
-(27, '2022-04-11', '2022-04-11', '2022-04-12', 1, 1, 19, 'xa', '3nlCKF18mh6ViUcPGfbJ'),
-(28, '2022-04-11', '2022-04-14', '2022-04-16', 2, 1, 19, '', 'pTMvPIZ9oyGdF2rgRQ3N'),
-(29, '2022-04-11', '2022-04-10', '2022-04-11', 1, 1, 19, '', 'dqbn675yVzP4J8fXo93R'),
-(30, '2022-04-11', '2022-04-11', '2022-04-12', 1, 1, 19, '', 'Vmj18yQIdzXHxLbNC7nO'),
-(31, '2022-04-11', '2022-04-11', '2022-04-12', 1, 1, 19, '', 'Xo1LagPCeq7jhGJDSbVZ'),
-(32, '2022-04-11', '2022-04-11', '2022-04-12', 1, 1, 19, '', 'KS47zxwG5l9kqXMveDa2'),
-(33, '2022-04-11', '2022-04-11', '2022-04-12', 1, 1, 19, '', 'M7WwLQHSznaBikoJfg1A'),
-(34, '2022-04-11', '2022-04-13', '2022-04-15', 2, 1, 19, '', 'wnGBNuRfO7v5VmhWXbix'),
-(35, '2022-04-11', '2022-04-13', '2022-04-16', 3, 1, 19, '', 'QRdDqgLaFK1SvHisMb2V'),
-(36, '2022-04-11', '2022-04-25', '2022-04-30', 5, 1, 19, 'summer holidays\r\n', '4wKBmNVdAIFesn0Jr7vy'),
-(37, '2022-04-11', '2022-04-13', '2022-04-15', 2, 1, 19, '', '2eUfNuai7G4cxJWOqCB8'),
-(38, '2022-04-11', '2022-04-13', '2022-04-16', 3, 3, 19, '', 'MJjVh7moXE4QL3HNGzlZ'),
-(39, '2022-04-11', '2022-04-12', '2022-04-13', 1, 3, 20, 'test', '9HLSJIxpN7uDbwU3RP40');
+(40, '2022-04-11', '2022-04-15', '2022-04-18', 3, 2, 20, 'Vacation', 'icPmEUAtD9byMTsXHR75'),
+(41, '2022-04-11', '2022-06-16', '2022-06-17', 1, 3, 20, 'i have my birthay on 16 of June', 'zpo2XDRthKBbW7vsTVF4'),
+(42, '2022-04-11', '2022-04-30', '2022-05-02', 2, 2, 19, 'Vacation', 'bQ7U68aPhMouc3NTFWn0'),
+(43, '2022-04-11', '2023-01-12', '2023-01-20', 8, 3, 19, 'vacation', 'MFUqLcZRkwWjsYIT6nN0');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -166,7 +157,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT για πίνακα `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Περιορισμοί για άχρηστους πίνακες
