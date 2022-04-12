@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: php-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ../:/var/www/html/
+    ports:
+      - 8000:80
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: leaveportaldb
+      MYSQL_USER: rootsql
+      MYSQL_PASSWORD: root
+      command: >
+          - mysqld
+          - "--character-set-server=utf8mb4"
+          - "--skip-character-set-client-handshake"
+          - "--collation-server=utf8mb4_unicode_ci"
+          - "--default-time-zone=Europe/Paris"
+    ports:
+      - "9906:3306"
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - '8080:80'
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db

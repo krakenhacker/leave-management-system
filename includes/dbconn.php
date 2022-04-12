@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "db";
+$username = "rootsql";
+$password = "root";
 $dbname = "leaveportaldb";
 
 // Create connection

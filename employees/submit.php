@@ -50,7 +50,7 @@ $sqlquerycheck = array("SELECT","UPDATE","DELETE");
             break;
         }
     }
-    $sql = "INSERT INTO submissions (vacstart, vacend, totaldays, statusid, employeeid, reason, submitkey)VALUES ('$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason', '$submitkey')";
+    $sql = "INSERT INTO submissions (date_submitted, vacstart, vacend, totaldays, statusid, employeeid, reason, submitkey)VALUES ('$currentdate','$datestart', '$dateend', $totaldays, 1,'" . $_SESSION['empid'] . "', '$reason', '$submitkey')";
 
     if ($totaldayscheck == "+" && $checkstartdate == "+" && $totaldays > 0 and $flag==TRUE) {
         if ($conn->query($sql) === TRUE) {
